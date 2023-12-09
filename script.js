@@ -57,6 +57,21 @@ class LinkedList {
       }
     }
   };
+  removeAt = index => {
+    let curIndex = 0;
+    let cur = this.head(),
+      preCur = null;
+    while (cur !== null && curIndex < index) {
+      preCur = cur;
+      cur = cur.nextNode;
+      curIndex++;
+      if (curIndex === index) {
+        preCur.nextNode = cur.nextNode;
+        break;
+      }
+    }
+    return null;
+  };
   pop = () => {
     let cur = this.head(),
       preCur = null,
@@ -228,40 +243,40 @@ console.log('Test at with invalid index:');
 recordTestResult(linkedList.at(-1) === null, null, linkedList.at(-1));
 
 console.log('Test behavior of head, tail, and at on an empty list:');
-linkedList = new LinkedList(); // Reset the list to be empty
+const linkedList2 = new LinkedList(); // Reset the list to be empty
 recordTestResult(
-  linkedList.head() === null &&
-    linkedList.tail() === null &&
-    linkedList.at(0) === null,
+  linkedList2.head() === null &&
+    linkedList2.tail() === null &&
+    linkedList2.at(0) === null,
   true,
-  linkedList.head() === null &&
-    linkedList.tail() === null &&
-    linkedList.at(0) === null
+  linkedList2.head() === null &&
+    linkedList2.tail() === null &&
+    linkedList2.at(0) === null
 );
 
 // Test toString more extensively
 console.log('Test toString with an empty list:');
 recordTestResult(
-  linkedList.toString() === 'null',
+  linkedList2.toString() === 'null',
   'null',
-  linkedList.toString()
+  linkedList2.toString()
 );
 
-linkedList.append(40);
+linkedList2.append(40);
 console.log('Test toString after append:');
 recordTestResult(
-  linkedList.toString() === '( 40 ) -> null',
+  linkedList2.toString() === '( 40 ) -> null',
   '( 40 ) -> null',
-  linkedList.toString()
+  linkedList2.toString()
 );
 
-linkedList.append(50);
-linkedList.removeAt(0);
+linkedList2.append(50);
+linkedList2.removeAt(0);
 console.log('Test toString after append and removeAt:');
 recordTestResult(
-  linkedList.toString() === '( 50 ) -> null',
+  linkedList2.toString() === '( 50 ) -> null',
   '( 50 ) -> null',
-  linkedList.toString()
+  linkedList2.toString()
 );
 
 // Function to summarize test results
