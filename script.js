@@ -43,8 +43,9 @@ class LinkedList {
   };
   pop = () => {
     let cur = this.head(),
-      preCur = null;
-    while (cur !== null) {
+      preCur = null,
+      tailNode = this.tail();
+    while (cur !== tailNode) {
       preCur = cur;
       cur = cur.nextNode;
     }
@@ -65,10 +66,10 @@ class LinkedList {
     let cur = this.head();
     let index = 0;
     while (cur !== null) {
-      index++;
       if (cur.value === value) {
         return index;
       }
+      index++;
       cur = cur.nextNode;
     }
     return null;
@@ -78,6 +79,7 @@ class LinkedList {
     let cur = this.head();
     while (cur !== null) {
       res += `( ${cur.value} ) -> `;
+      cur = cur.nextNode;
     }
     return (res += 'null');
   };
