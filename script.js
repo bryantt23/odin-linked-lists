@@ -1,9 +1,32 @@
 class LinkedList {
-  // ... Your LinkedList class implementation goes here
+  constructor() {
+    const dummy = new Node(-1);
+    this.headNode = dummy;
+    this.tailNode = dummy;
+  }
+  append = value => {
+    const newNode = new Node(value);
+    this.tailNode.nextNode = newNode;
+    this.tailNode = newNode;
+  };
+  prepend = value => {
+    const newNode = new Node(value);
+    newNode.nextNode = this.headNode.nextNode;
+    this.headNode = newNode;
+  };
+  tail = () => {
+    return this.tailNode;
+  };
+  head = () => {
+    return this.headNode;
+  };
 }
 
 class Node {
-  // ... Your Node class implementation goes here
+  constructor(value) {
+    this.nextNode = null;
+    this.value = value;
+  }
 }
 
 // Initialize test counters
