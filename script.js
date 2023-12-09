@@ -41,6 +41,22 @@ class LinkedList {
     }
     return null;
   };
+  insertAt = (value, index) => {
+    let ct = 0;
+    let cur = this.head(),
+      preCur = null;
+    while (cur !== null && ct < index) {
+      preCur = cur;
+      cur = cur.nextNode;
+      ct++;
+      if (ct === index) {
+        const newNode = new Node(value);
+        preCur.nextNode = newNode;
+        newNode.nextNode = cur;
+        break;
+      }
+    }
+  };
   pop = () => {
     let cur = this.head(),
       preCur = null,
