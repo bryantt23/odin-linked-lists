@@ -20,6 +20,47 @@ class LinkedList {
   head = () => {
     return this.headNode;
   };
+  size = () => {
+    let ct = 0;
+    let cur = this.head();
+    while (cur !== null) {
+      cur = cur.nextNode;
+      ct++;
+    }
+    return ct;
+  };
+  at = index => {
+    let ct = 0;
+    let cur = this.head();
+    while (cur !== null) {
+      cur = cur.nextNode;
+      ct++;
+      if (ct === index) {
+        return cur;
+      }
+    }
+    return null;
+  };
+  pop = () => {
+    let cur = this.head(),
+      preCur = null;
+    while (cur !== null) {
+      preCur = cur;
+      cur = cur.nextNode;
+    }
+    preCur.nextNode = null;
+    this.tailNode = preCur;
+  };
+  contains = value => {
+    let cur = this.head();
+    while (cur !== null) {
+      if (cur.value === value) {
+        return true;
+      }
+      cur = cur.nextNode;
+    }
+    return false;
+  };
 }
 
 class Node {
