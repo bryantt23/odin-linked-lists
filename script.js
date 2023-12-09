@@ -1,17 +1,26 @@
 class LinkedList {
   constructor() {
-    const dummy = new Node(-1);
-    this.headNode = dummy;
-    this.tailNode = dummy;
+    this.headNode = null;
+    this.tailNode = null;
   }
   append = value => {
     const newNode = new Node(value);
-    this.tailNode.nextNode = newNode;
+    if (this.headNode === null) {
+      this.headNode = newNode; //first node
+    } else if (this.headNode === this.tailNode) {
+      this.headNode.nextNode = newNode; //now 2 nodes, head points to new
+    } else {
+      this.tailNode.nextNode = newNode; //tail points to new
+    }
     this.tailNode = newNode;
   };
   prepend = value => {
     const newNode = new Node(value);
-    newNode.nextNode = this.headNode.nextNode;
+    if (this.headNode === null) {
+      this.tailNode = newNode; //first node
+    } else {
+      newNode.nextNode = this.headNode; //tail points to new
+    }
     this.headNode = newNode;
   };
   tail = () => {
@@ -61,14 +70,18 @@ class LinkedList {
     let curIndex = 0;
     let cur = this.head(),
       preCur = null;
-    while (cur !== null && curIndex < index) {
+    while (cur !== null) {
+      if (curIndex === index) {
+        if (preCur === null) {
+          this.headNode = cur.nextNode;
+        } else {
+          preCur.nextNode = cur.nextNode;
+        }
+        break;
+      }
       preCur = cur;
       cur = cur.nextNode;
       curIndex++;
-      if (curIndex === index) {
-        preCur.nextNode = cur.nextNode;
-        break;
-      }
     }
     return null;
   };
